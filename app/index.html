@@ -21,6 +21,8 @@
 <body>
 <ul class="menu">
     <li><a href="#!/home">home</a></li>
+    <li><a href="#!/registration">Registration</a></li>
+    <li><a href="#!/login">Login</a></li>
 </ul>
 
 <!--[if lt IE 7]>
@@ -37,13 +39,20 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="app.js"></script>
-
+<!----------------------------------------Home------------------------------------------>
 <script src="modules/home/home.module.js"></script>
 <script src="modules/home/controllers/home.controller.js"></script>
+<script src="modules/home/services/home.service.js"></script>
 <script src="modules/home/routes/home.route.js"></script>
-
-<script src="components/version/version.js"></script>
-<script src="components/version/version-directive.js"></script>
-<script src="components/version/interpolate-filter.js"></script>
+<!----------------------------------------Registration------------------------------------------>
+<script src="modules/registration/registration.module.js"></script>
+<script src="modules/registration/controllers/registration.controller.js"></script>
+<script src="modules/registration/services/registration.service.js"></script>
+<script src="modules/registration/routes/registration.route.js"></script>
+<!----------------------------------------Login------------------------------------------>
+<script src="modules/login/login.module.js"></script>
+<script src="modules/login/controllers/login.controller.js"></script>
+<script src="modules/login/services/login.service.js"></script>
+<script src="modules/login/routes/login.route.js"></script>
 </body>
 </html>

@@ -4,9 +4,11 @@
 angular.module('pointOfInterest', [
   'ngRoute',
   'home',
+  'registration',
+  'login',
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/home'});
 }]);
