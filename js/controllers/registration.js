@@ -1,15 +1,15 @@
-myApp.controller('RegistrationController', ['$scope',
-    function ($scope) {
+myApp.controller('RegistrationController', ['$scope', 'registrationService',
+    function ($scope, registrationService) {
 
-        $scope.part = "firstPart";
-
-        $scope.login = function () {
-        };
-
-        $scope.logout = function () {
-        };
+        let user = {
+            userName: "Shir",
+            password: "abcd",
+            isAdmin: true
+        }
 
         $scope.register = function () {
+
+            registrationService.register($scope.user);
         };
 
     }]);
