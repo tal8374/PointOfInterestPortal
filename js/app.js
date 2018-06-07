@@ -19,6 +19,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'views/success.html',
         controller: 'SuccessController',
     }).
+    when('/homepage', {
+        templateUrl: 'views/homepage.html',
+        controller: 'HomepageController',
+    }).
     otherwise({
         redirectTo: '/login'
     });
