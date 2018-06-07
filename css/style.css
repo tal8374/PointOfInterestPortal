@@ -1,4 +1,6 @@
 /* apply a natural box layout model to all elements, but allowing components to change */
+@import "homepage.css";
+
 html {
     box-sizing: border-box;
 }

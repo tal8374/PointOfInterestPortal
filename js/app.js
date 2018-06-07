@@ -19,6 +19,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'views/recover-password.html',
         controller: 'RecoverPasswordController',
     }).
+    when('/homepage', {
+        templateUrl: 'views/homepage.html',
+        controller: 'HomepageController',
+    }).
     otherwise({
         redirectTo: '/login'
     });
