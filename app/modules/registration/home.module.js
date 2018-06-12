@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('home', ['ngRoute']);
+// angular.module('home', ['ngRoute']);

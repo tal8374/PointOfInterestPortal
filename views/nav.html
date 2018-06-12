@@ -1,11 +1,12 @@
 <div class="branding">
     <a href="#/homepage">Point Of Interest </a>
 </div>
-<ul>
+<ul  ng-controller="LoginController">
     <li><a ng-hide="currentUser" ng-href="#/login">Login</a></li>
     <li><a ng-hide="currentUser" ng-href="#/register">Register</a></li>
     <li>
-        <div class="userinfo" ng-show="currentUser" ng-controller="RegistrationController">
+        <div class="userinfo" ng-show="currentUser">
+            <p> {{ currentUser.userName }} </p>
             <span class="userinfo"><a ng-href="#/login" ng-click="logout()">logout</a></span>
         </div>
     </li>
