@@ -17,7 +17,10 @@ myApp.config(['$routeProvider', function ($routeProvider) {
     }).when('/homepage', {
         templateUrl: 'views/homepage.html',
         controller: 'HomepageController',
+    }).when('/point-of-interest/:id', {
+        templateUrl: 'views/point-of-interest.html',
+        controller: 'pointOfInterestController',
     }).otherwise({
-        redirectTo: '/login'
+        redirectTo: '/homepage'
     });
 }]);

@@ -1,15 +1,28 @@
-<section class="homepage">
-<div class="split left">
-    <div class="centered">
-        <h2>Recommended points of interest</h2>
-        <p>Some text.</p>
+<div class="row" ng-show="pointsOfInterest">
+    <div class="col-sm-5">
+        <h1 class="poi-header">My Points Of Interests</h1>
+        <div class="row">
+            <div ng-repeat="poi in pointsOfInterest" class="col-sm-6">
+                <div class="card">
+                    <img src="img_avatar2.png" alt="Avatar">
+                    <h4><b>{{ poi.name }}</b></h4>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="col-sm-2">
 
-<div class="split right">
-    <div class="centered">
-        <h2>Recent saved POIs</h2>
-        <p>Some text here too.</p>
+    </div>
+    <div class="col-sm-5">
+        <h1 class="poi-header">Recommended Points Of Interests</h1>
+        <div class="row">
+            <div ng-click="goToPOI(poi)" ng-repeat="poi in pointsOfInterest" class="col-sm-6">
+                <div class="card">
+                    <img src="img_avatar2.png" alt="Avatar">
+                    <h4><b>{{ poi.name }}</b></h4>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
-</section>

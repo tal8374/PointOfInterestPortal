@@ -1,0 +1,50 @@
+<div class="poi" ng-show="currentPOI">
+    <div class="container">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="text-center"> {{ currentPOI.name }} </h1>
+                </div>
+            </div>
+            <div class="col-xs-3 col-md-4 col-sm-4 media-left pull-left">
+                <img src="https://www.nasa.gov/sites/default/files/thumbnails/image/neil_armtstron_hi.jpg"
+                     class="img-circle img-responsive">
+            </div>
+            <div class="col-xs-9 col-md-8 col-sm-8 pull-right">
+                <br>
+                <br>
+                <ul>
+                    <li> {{ currentPOI.description }}</li>
+                </ul>
+                <label>Number of visits</label>
+                <ul>
+                    <li> 424</li>
+                </ul>
+                <label>Rating</label>
+                <ul>
+                    <li> 50%</li>
+                </ul>
+                <label>Last visits</label>
+                <ul>
+                    <li> 19</li>
+                    <li> 20</li>
+                </ul>
+
+                <!--<div ng-show="currentUser" >-->
+                <div>
+                    <div class="rating">
+                        <div class="create-review">
+                            <button ng-click="addReview()" type="button" class="btn btn-outline-primary">Create new review</button>
+                        </div>
+
+                        <span ng-click="rate(5)" title="five stars">&#9734;</span>
+                        <span ng-click="rate(4)" title="four stars">&#9734;</span>
+                        <span ng-click="rate(3)" title="three stars">&#9734;</span>
+                        <span ng-click="rate(2)" title="two stars">&#9734;</span>
+                        <span ng-click="rate(1)" title="one star">&#9734;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
