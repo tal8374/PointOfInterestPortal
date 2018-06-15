@@ -16,12 +16,17 @@ myApp.controller('LoginController', ['$scope', '$location', 'loginService', 'myL
 
                     $location.path('/homepage');
                 }, function (response) {
-                    console.log(response);
+                    $scope.errorMessage = "User name or password is not correct";
                 });
         };
 
         $scope.logout =function () {
             $rootScope.currentUser = null;
-        }
+        };
+
+        $scope.moveToRecoverPage = function () {
+            console.log("clicked");
+            $location.path('/recover-passwords');
+        };
 
     }]);

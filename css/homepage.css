@@ -24,6 +24,13 @@
     line-height: 90px;
 }
 
-.poi-header {
+h4 {
+    text-align: center;
+}
 
+.poi-header {
+    text-align: center;
+    font: bold italic 2em/1em "Times New Roman", "MS Serif", "New York", serif;
+    margin: 10px 0 0 0;
+    padding: 0;
 }

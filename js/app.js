@@ -1,10 +1,11 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
 
 myApp.run(['$rootScope', function ($rootScope) {
 
 }]);
 
 myApp.config(['$routeProvider', function ($routeProvider) {
+
     $routeProvider.when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginController'

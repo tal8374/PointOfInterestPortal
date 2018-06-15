@@ -1,13 +1,19 @@
-<div class="branding">
-    <a href="#/homepage">Point Of Interest </a>
-</div>
-<ul  ng-controller="LoginController">
-    <li><a ng-hide="currentUser" ng-href="#/login">Login</a></li>
-    <li><a ng-hide="currentUser" ng-href="#/register">Register</a></li>
-    <li>
-        <div class="userinfo" ng-show="currentUser">
-            <p> {{ currentUser.userName }} </p>
-            <span class="userinfo"><a ng-href="#/login" ng-click="logout()">logout</a></span>
+<nav class="nav dark-nav">
+    <div class="container">
+        <div class="nav-heading">
+            <button class="toggle-nav" data-toggle="open-navbar1"><i class="fa fa-align-right"></i></button>
+            <a class="brand" href="#/homepage">Point of interests</a>
         </div>
-    </li>
-</ul>
+        <div class="menu" id="open-navbar1">
+            <ul class="list">
+                <li ng-hide="currentUser"><a ng-click="" ng-hide="currentUser" ng-href="#/login">Login</a></li>
+                <li ng-hide="currentUser"><a ng-hide="currentUser" ng-href="#/register">Register</a></li>
+                <li ng-show="currentUser"><a ng-href="#"> Hello {{ currentUser.userName }} </a></li>
+                <li ng-show="currentUser"><a ng-click="logout()" ng-href="#/homepage">logout</a></li>
+            </ul>
+        </div>
+        </li>
+        </ul>
+    </div>
+    </div>
+</nav>

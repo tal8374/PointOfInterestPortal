@@ -1,50 +1,140 @@
-<div class="poi" ng-show="currentPOI">
-    <div class="container">
-        <div class="jumbotron">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h1 class="text-center"> {{ currentPOI.name }} </h1>
-                </div>
-            </div>
-            <div class="col-xs-3 col-md-4 col-sm-4 media-left pull-left">
-                <img src="https://www.nasa.gov/sites/default/files/thumbnails/image/neil_armtstron_hi.jpg"
-                     class="img-circle img-responsive">
-            </div>
-            <div class="col-xs-9 col-md-8 col-sm-8 pull-right">
-                <br>
-                <br>
-                <ul>
-                    <li> {{ currentPOI.description }}</li>
-                </ul>
-                <label>Number of visits</label>
-                <ul>
-                    <li> 424</li>
-                </ul>
-                <label>Rating</label>
-                <ul>
-                    <li> 50%</li>
-                </ul>
-                <label>Last visits</label>
-                <ul>
-                    <li> 19</li>
-                    <li> 20</li>
-                </ul>
+<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
 
-                <!--<div ng-show="currentUser" >-->
-                <div>
-                    <div class="rating">
-                        <div class="create-review">
-                            <button ng-click="addReview()" type="button" class="btn btn-outline-primary">Create new review</button>
-                        </div>
+<!-- Modal -->
+<!--<div class="modal fade" id="myModal" role="dialog">-->
+    <!--<div class="modal-dialog">-->
 
-                        <span ng-click="rate(5)" title="five stars">&#9734;</span>
-                        <span ng-click="rate(4)" title="four stars">&#9734;</span>
-                        <span ng-click="rate(3)" title="three stars">&#9734;</span>
-                        <span ng-click="rate(2)" title="two stars">&#9734;</span>
-                        <span ng-click="rate(1)" title="one star">&#9734;</span>
-                    </div>
-                </div>
+        <!--&lt;!&ndash; Modal content&ndash;&gt;-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                <!--<h4 class="modal-title">Create review</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>-->
+
+                <!--<div class="md-form rating">-->
+                    <!--<span ng-click="rate(5)" title="five stars">&#9734;</span>-->
+                    <!--<span ng-click="rate(4)" title="four stars">&#9734;</span>-->
+                    <!--<span ng-click="rate(3)" title="three stars">&#9734;</span>-->
+                    <!--<span ng-click="rate(2)" title="two stars">&#9734;</span>-->
+                    <!--<span ng-click="rate(1)" title="one star">&#9734;</span>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                <!--<button ng-click="createReview()" type="submit" class="btn btn-default" data-dismiss="modal">Submit</button>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--</div>-->
+<!--</div>-->
+
+<div class="modal fade" id="myModal" role="dialog">
+    <form id="myform" ng-submit="send()">
+        <fieldset style="padding: 20px;">
+            <span style="margin-left: 350px; cursor: pointer" data-dismiss="modal" aria-hidden="true">&times;</span>
+            <h1>Create a review</h1>
+
+            <textarea style="font-size: 19px;" type="text" id="form8" class="md-textarea form-control" rows="4" required></textarea>
+
+            <div style="margin: 10px 0 0 100px;" class="md-form rating">
+                <input ng-click="rate(5)" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                <input ng-click="rate(4.5)" type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                <input ng-click="rate(4)" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                <input ng-click="rate(3.5)" type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                <input ng-click="rate(3)" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                <input ng-click="rate(2.5)" type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                <input ng-click="rate(2)" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                <input ng-click="rate(1.5)" type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                <input ng-click="rate(1)" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                <input ng-click="rate(0.5)" type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
             </div>
-        </div>
-    </div>
+
+            <input ng-disabled="myForm.$invalid" type="submit" name="Submit" class="next action-button"
+                   value="Submit"/>
+            <input style="text-align: center; cursor: pointer" name="RecoverPassword"
+                   data-dismiss="modal" name="Cancel" class="next action-button" value="Cancel"/>
+
+        </fieldset>
+
+    </form>
 </div>
+
+
+<div class="profile-card" ng-show="currentPOI && !isModalOpen">
+    <header>
+        <img src="img_avatar2.png" class="profile-photo">
+        <h1> {{ currentPOI.name }} </h1>
+        <input data-toggle="modal" data-target="#myModal" name="review" class="add-review next action-button" value="Add review"/>
+
+        <div class="heart-icon">
+            <i class="far fa-heart"></i>
+        </div>
+    </header>
+    <div class="profile-bio">
+        <p> {{ currentPOI.description }}</p>
+        <!-- some social links -->
+        <!--<ul class="profile-social-links">-->
+        <!--<li>-->
+
+        <!--<i class="fab fa-facebook-square"></i>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<i class="fab fa-instagram"></i>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--<li>-->
+
+        <!--<i class="fab fa-linkedin"></i>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+    </div>
+
+</div>
+
+<!--<div class="poi" ng-show="currentPOI && !isModalOpen">-->
+<!--<div class="container">-->
+<!--<div class="jumbotron">-->
+<!--<div class="row">-->
+<!--<div class="col-xs-12">-->
+<!--<h1 class="text-center"> {{ currentPOI.name }} </h1>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-xs-3 col-md-4 col-sm-4 media-left pull-left">-->
+<!--<img src="https://www.nasa.gov/sites/default/files/thumbnails/image/neil_armtstron_hi.jpg"-->
+<!--class="img-circle img-responsive">-->
+<!--</div>-->
+<!--<div class="col-xs-9 col-md-8 col-sm-8 pull-right">-->
+<!--<br>-->
+<!--<br>-->
+<!--<ul>-->
+<!--<li> {{ currentPOI.description }}</li>-->
+<!--</ul>-->
+<!--<label>Number of visits</label>-->
+<!--<ul>-->
+<!--<li> 424</li>-->
+<!--</ul>-->
+<!--<label>Rating</label>-->
+<!--<ul>-->
+<!--<li> 50%</li>-->
+<!--</ul>-->
+<!--<label>Last visits</label>-->
+<!--<ul>-->
+<!--<li> 19</li>-->
+<!--<li> 20</li>-->
+<!--</ul>-->
+
+<!--&lt;!&ndash;<div ng-show="currentUser" >&ndash;&gt;-->
+<!--<div>-->
+
+<!--<button ng-click="addReview($event)" type="button" class="btn btn-outline-primary">Create-->
+<!--new review-->
+<!--</button>-->
+
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->

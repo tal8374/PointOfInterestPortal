@@ -1,7 +1,22 @@
 myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService', '$routeParams', '$rootScope',
-    function ($scope, pointOfInterestService, $routeParams, $rootScope) {
+    '$mdDialog',
+    function ($scope, pointOfInterestService, $routeParams, $rootScope, $mdDialog) {
 
         $scope.pointOfInterestId = $routeParams.id;
+
+        $scope.close = function () {
+            $rootScope.isModalOpen = false;
+
+            $mdDialog.hide();
+        };
+
+        $scope.createReview = function () {
+            console.log("created");
+        };
+
+        $scope.rate = function (rank) {
+            console.log(rank);
+        };
 
         $scope.getPOI = function () {
             pointOfInterestService.getPOI($scope.pointOfInterestId).then(function (POI) {
@@ -34,44 +49,23 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
             });
         };
 
-        $scope.rate = function (rank) {
-            // var userId = $rootScope.currentUser.userId;
-
-            // pointOfInterestService.getPOIReviews($scope.pointOfInterestId, userId, rank).then(function (POIReviews) {
-            //
-            // });
-        };
 
         $scope.addReview = function () {
-            // $mdDialog.show({
-            //     controller: DialogController,
-            //     templateUrl: '../views/recover-password.html',
-            //     // parent: angular.element(document.body),
-            //     targetEvent: ev,
-            //     clickOutsideToClose: true,
-            //     // fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-            // })
-            //     .then(function (answer) {
-            //         $scope.status = 'You said the information was "' + answer + '".';
-            //     }, function () {
-            //         $scope.status = 'You cancelled the dialog.';
-            //     });
+            console.log("clicked");
+
+            $rootScope.isModalOpen = true;
+
+            var createReview = $rootScope.$new();
+
+            $mdDialog.show({
+                templateUrl: 'views/create-review.html',
+                controller: 'createReviewController as createReviewController',
+                scope: createReview
+            }).then(function (result) {
+            }).catch(function (err) {
+                $log.info(err);
+            });
         };
-
-
-        // function DialogController($scope, $mdDialog) {
-        //     $scope.hide = function () {
-        //         $mdDialog.hide();
-        //     };
-        //
-        //     $scope.cancel = function () {
-        //         $mdDialog.cancel();
-        //     };
-        //
-        //     $scope.answer = function (answer) {
-        //         $mdDialog.hide(answer);
-        //     };
-        // }
 
         $scope.getPOI();
 

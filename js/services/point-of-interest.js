@@ -40,13 +40,23 @@ myApp.service('pointOfInterestService', ['$http',
         };
 
         factory.getPOIRanks = function (pointOfInterestId) {
-            console.log(serverUrl + "point-of-interest/" + pointOfInterestId + "/rank/list");
-
             return $http.get(serverUrl + "point-of-interest/" + pointOfInterestId + "/review/list", {});
         };
 
         factory.createPOIRank = function (pointOfInterestId, userId, rank) {
             return $http.post(serverUrl + "point-of-interest/" + pointOfInterestId + "/rank/user/" + userId, {rank});
+        };
+
+        factory.getUserPOI = function (pointOfInterestId, userId) {
+            return $http.get(serverUrl + "point-of-interest/" + pointOfInterestId + "/user/" + userId + "/list", {});
+        };
+
+        factory.createUserPOI = function (pointOfInterestId, userId) {
+            return $http.post(serverUrl + "point-of-interest/" + pointOfInterestId + "/rank/user/" + userId, {});
+        };
+
+        factory.createUserPOI = function (pointOfInterestId, userId) {
+            return $http.delete(serverUrl + "point-of-interest/" + pointOfInterestId + "/rank/user/" + userId, {});
         };
 
         return factory;
