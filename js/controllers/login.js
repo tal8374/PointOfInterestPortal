@@ -20,6 +20,9 @@ myApp.controller('LoginController', ['$scope', '$location', 'loginService', 'myL
                 });
         };
 
+
+        console.log("here");
+
         $scope.logout =function () {
             $rootScope.currentUser = null;
         };

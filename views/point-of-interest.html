@@ -1,25 +1,42 @@
 <div class="modal fade" id="myModal" role="dialog">
-    <form id="myform" ng-submit="send()">
+    <form id="myform">
         <fieldset style="padding: 20px;">
             <span style="margin-left: 350px; cursor: pointer" data-dismiss="modal" aria-hidden="true">&times;</span>
             <h1>Create a review</h1>
-            <textarea style="font-size: 19px;" type="text" id="form8" class="md-textarea form-control" rows="4" required></textarea>
+            <textarea ng-model="reviewContent" style="font-size: 19px;" type="text" id="form8"
+                      class="md-textarea form-control" rows="4" required></textarea>
 
             <div style="margin: 10px 0 0 100px;" class="md-form rating">
-                <input ng-click="rate(5)" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                <input ng-click="rate(4.5)" type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                <input ng-click="rate(4)" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                <input ng-click="rate(3.5)" type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                <input ng-click="rate(3)" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                <input ng-click="rate(2.5)" type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                <input ng-click="rate(2)" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                <input ng-click="rate(1.5)" type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                <input ng-click="rate(1)" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                <input ng-click="rate(0.5)" type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                <input ng-click="doRank(5)" type="radio" id="star5" name="rating" value="5"/><label class="full"
+                                                                                                    for="star5"
+                                                                                                    title="Awesome - 5 stars"></label>
+                <input ng-click="doRank(4.5)" type="radio" id="star4half" name="rating" value="4 and a half"/><label
+                    class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                <input ng-click="doRank(4)" type="radio" id="star4" name="rating" value="4"/><label class="full"
+                                                                                                    for="star4"
+                                                                                                    title="Pretty good - 4 stars"></label>
+                <input ng-click="doRank(3.5)" type="radio" id="star3half" name="rating" value="3 and a half"/><label
+                    class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                <input ng-click="doRank(3)" type="radio" id="star3" name="rating" value="3"/><label class="full"
+                                                                                                    for="star3"
+                                                                                                    title="Meh - 3 stars"></label>
+                <input ng-click="doRank(2.5)" type="radio" id="star2half" name="rating" value="2 and a half"/><label
+                    class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                <input ng-click="doRank(2)" type="radio" id="star2" name="rating" value="2"/><label class="full"
+                                                                                                    for="star2"
+                                                                                                    title="Kinda bad - 2 stars"></label>
+                <input ng-click="doRank(1.5)" type="radio" id="star1half" name="rating" value="1 and a half"/><label
+                    class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                <input ng-click="doRank(1)" type="radio" id="star1" name="rating" value="1"/><label class="full"
+                                                                                                    for="star1"
+                                                                                                    title="Sucks big time - 1 star"></label>
+                <input ng-click="doRank(0.5)" type="radio" id="starhalf" name="rating" value="half"/><label class="half"
+                                                                                                            for="starhalf"
+                                                                                                            title="Sucks big time - 0.5 stars"></label>
             </div>
 
             <input ng-disabled="myForm.$invalid" type="submit" name="Submit" class="next action-button"
-                   value="Submit"/>
+                   value="Submit" data-dismiss="modal" ng-click="createReview()"/>
             <input style="text-align: center; cursor: pointer" name="RecoverPassword"
                    data-dismiss="modal" name="Cancel" class="next action-button" value="Cancel"/>
         </fieldset>
@@ -27,18 +44,57 @@
 </div>
 
 
-<div class="profile-card" ng-show="currentPOI && !isModalOpen">
+<div style="height: 800px;" class="profile-card" ng-show="currentPOI && !isModalOpen">
     <header>
-        <img src="./assets/images/{{ currentPOI.image }}.jpeg"  class="profile-photo">
+        <img src="./assets/images/{{ currentPOI.image }}.jpeg" class="profile-photo">
         <h1> {{ currentPOI.name }} </h1>
-        <input data-toggle="modal" data-target="#myModal" name="review" class="add-review next action-button" value="Add review"/>
+        <h1>Number of visits - {{ visits.length }} </h1>
+        <h1>Rank - {{ rank }} % </h1>
+        <input data-toggle="modal" data-target="#myModal" name="review" class="add-review next action-button"
+               value="Add review"/>
 
-        <div class="heart-icon">
+        <div ng-click="addToUserFavorite()" class="heart-icon">
             <i class="far fa-heart"></i>
         </div>
+
+
     </header>
     <div class="profile-bio">
-        <p> {{ currentPOI.description }}</p>
+        <p style="font-size: 20px;line-height: 1.6;"> {{ currentPOI.description }}</p>
+
+
+        <div class="row" ng-show="reviews && ranks">
+            <div class="col-sm-6" ng-show="reviews.length > 0">
+                <div class="rbd-core-ui">
+                    <div class="rbd-review-slider" data-speed="1000">
+                        <div class="rbd-review review1.1 rbd-curr">
+                            <h3 class="rbd-heading">{{ reviews[reviews.length - 1].content }}</h3>
+                            <div class="stars rate" data-percent=" {{ ranks[reviews.length - 1].rank * 20 }} ">
+                                <a  title="awful">★</a><a  title="ok">★</a>
+                                <a  title="good">★</a><a  title="great">★</a>
+                                <a title="awesome">★</a></div>
+                            <br>
+                            <div class="rbd-review-meta">Written on {{ reviews[reviews.length - 1].date }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-show="reviews.length > 1">
+                <div class="rbd-core-ui">
+                    <div class="rbd-review-slider" data-speed="1000">
+                        <div class="rbd-review review1.1 rbd-curr">
+                            <h3 class="rbd-heading">{{ reviews[reviews.length - 2].content }}</h3>
+                            <div class="stars rate" data-percent=" {{ ranks[reviews.length - 2].rank * 20 }} ">
+                                <a  title="awful">★</a><a  title="ok">★</a>
+                                <a  title="good">★</a><a  title="great">★</a>
+                                <a title="awesome">★</a></div>
+                            <br>
+                            <div class="rbd-review-meta">Written on {{ reviews[reviews.length - 2].date }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 

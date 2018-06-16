@@ -4,6 +4,16 @@ myApp.controller('HomepageController', ['$scope', 'pointOfInterestService', '$lo
         $scope.getPOI = function () {
             pointOfInterestService.getPOIList().then(function (pointOfInterests) {
                 $scope.pointsOfInterest = pointOfInterests.data;
+
+                setTimeout(function () {
+                    $scope.getUserPOI();
+                }, 0);
+            })
+        };
+
+        $scope.getUserPOI = function () {
+            pointOfInterestService.getUserPOI().then(function (pointOfInterests) {
+                $scope.userPointsOfInterest = pointOfInterests.data;
             })
         };
 
