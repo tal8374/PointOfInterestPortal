@@ -53,15 +53,9 @@
         <input data-toggle="modal" data-target="#myModal" name="review" class="add-review next action-button"
                value="Add review"/>
 
-        <div ng-click="addToUserFavorite()" class="heart-icon">
-            <i class="far fa-heart"></i>
-        </div>
-
-
     </header>
     <div class="profile-bio">
         <p style="font-size: 20px;line-height: 1.6;"> {{ currentPOI.description }}</p>
-
 
         <div class="row" ng-show="reviews && ranks">
             <div class="col-sm-6" ng-show="reviews.length > 0">

@@ -9,6 +9,14 @@ myApp.service('pointOfInterestService', ['$http',
             return $http.get(serverUrl + "point-of-interest/list", {});
         };
 
+        factory.getPOICategoryList = function () {
+            return $http.get(serverUrl + "point-of-interest/category/list", {});
+        };
+
+        factory.getPOIRankList = function () {
+            return $http.get(serverUrl + "point-of-interest/rank/list", {});
+        };
+
         factory.getPOI = function (pointOfInterestId) {
             return $http.get(serverUrl + "point-of-interest/" + pointOfInterestId, {});
         };

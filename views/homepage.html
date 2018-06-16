@@ -4,7 +4,7 @@
         <div class="row">
             <div ng-click="goToPOI(poi)" ng-repeat="poi in userPointsOfInterest" class="col-sm-6">
                 <div class="card">
-                    <img style="width: 320px; height: 200px;" src="./assets/images/{{ poi.image }}.jpeg" alt="Avatar">
+                    <img style="width: 320px; height: 200px;" ng-src="./assets/images/{{ poi.image }}.jpeg" alt="Avatar">
                     <h4><b>{{ poi.name }}</b></h4>
                 </div>
             </div>
@@ -18,7 +18,7 @@
         <div class="row">
             <div ng-click="goToPOI(poi)" ng-repeat="poi in pointsOfInterest" class="col-sm-6">
                 <div class="card">
-                    <img style="width: 320px; height: 200px;" src="./assets/images/{{ poi.image }}.jpeg" alt="Avatar">
+                    <img style="width: 320px; height: 200px;" ng-src="./assets/images/{{ poi.image }}.jpeg" alt="Avatar">
                     <h4><b>{{ poi.name }}</b></h4>
                 </div>
             </div>

@@ -1,0 +1,46 @@
+<div class="row">
+
+    <div class="col-sm-6">
+        <select style="height: 57px; font-size: 20px; padding: 5px; " class="form-control" name="category"
+                ng-model="chosenFilteredCategory"
+                required>
+            <option value="" disabled selected>Select category to be filtered with</option>
+            <option value="Don't filter by category" selected>Don't filter by category</option>
+            <option ng-repeat="category in categories" value="{{ category.name }}">{{ category.name }}</option>
+        </select>
+    </div>
+
+    <div class="col-sm-6">
+        <input style=" text-align: center; " type='number'
+               ng-model='filteredRank' placeholder="Filter by rank"/>
+        <p style="color: red;" ng-show="errorMessage"> {{ errorMessage }} </p>
+    </div>
+
+</div>
+
+<div class="row">
+    <!--<div ng-show="userPointsOfInterest" ng-repeat="poi in userPointsOfInterest | filter: greaterThan('rank', 0 ) | filter: equalToCategory('category', 0 )" class="col-sm-3">-->
+    <div ng-show="userPointsOfInterest" ng-repeat="poi in userPointsOfInterest | filter: equalToCategory('category', 0 ) | filter: greaterThan('rank', 0 ) " class="col-sm-3">
+        <div class="card">
+            <div ng-click="goToPOI(poi)">
+                <img style="width: 430px; height: 200px;" ng-src="./assets/images/{{ poi.image }}.jpeg" alt="Avatar">
+                <h4><b>{{ poi.name }}</b></h4>
+            </div>
+
+            <div style="margin-left: 160px;">
+                <i ng-click="removeFromFavorites(poi)" class="material-icons">star</i>
+            </div>
+        </div>
+    </div>
+
+    <form ng-show="userPointsOfInterest && userPointsOfInterest.length == 0" id="myform" ng-submit="register()">
+        <fieldset style="width: 900px;padding: 20px; margin-left: -200px">
+            <div>
+                <h1><b>No Favorite POI !</b></h1>
+                <h2>Seems that you have not chosen any POI</h2>
+                <h2>You can add POI by clicking on one of the POI's stars in POI page!</h2>
+            </div>
+        </fieldset>
+    </form>
+</div>
+

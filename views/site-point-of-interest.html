@@ -1,0 +1,30 @@
+<div class="row" ng-show="pointsOfInterest">
+    <input style="width: 750px; text-align: center; margin-left: 600px;" type='text'
+           ng-model='searchText' placeholder="Search a POI"/>
+</div>
+
+<div class="row" ng-show="pointsOfInterest">
+    <form ng-show="(pointsOfInterest|filter:searchText).length == 0" id="myform" ng-submit="register()">
+        <fieldset style="width: 900px;padding: 20px; margin-left: -220px">
+            <div>
+                <h1><b>There are no POI relevant to the query! please search another one</b></h1>
+            </div>
+        </fieldset>
+    </form>
+
+    <div ng-repeat="poi in pointsOfInterest | filter:searchText" class="col-sm-3">
+        <div class="card">
+            <div ng-click="goToPOI(poi)">
+                <img style="width: 430px; height: 200px;" ng-src="./assets/images/{{ poi.image }}.jpeg" alt="Avatar">
+                <h4><b>{{ poi.name }}</b></h4>
+            </div>
+
+            <div style="margin-left: 160px;">
+                <i ng-click="removeFromFavorites(poi)" class="material-icons">star</i>
+                <i ng-click="addFromFavorites(poi)" class="material-icons">star_border</i>
+            </div>
+        </div>
+
+    </div>
+
+</div>
