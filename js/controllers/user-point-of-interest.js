@@ -1,13 +1,23 @@
 myApp.controller('userPointOfInterestController', ['$scope', 'pointOfInterestService', '$location', '$q',
-    'categoryService',
-    function ($scope, pointOfInterestService, $location, $q, categoryService) {
+    'categoryService', 'myLocalStorageService',
+    function ($scope, pointOfInterestService, $location, $q, categoryService, myLocalStorageService) {
 
         $scope.filteredRank = 0;
         $scope.chosenFilteredCategory = "Don't filter by category";
 
         $scope.getUserPOI = function () {
-            pointOfInterestService.getUserPOI().then(function (pointOfInterests) {
-                $scope.userPointsOfInterest = pointOfInterests.data;
+            pointOfInterestService.getPOIList().then(function (pointOfInterests) {
+                $scope.userPointsOfInterest = [];
+
+                let favorites = myLocalStorageService.getFavorites();
+
+                pointOfInterests.data.forEach(function (poi) {
+                    const index = favorites.indexOf(poi.pointOfInterestId);
+
+
+                    if (index !== -1) $scope.userPointsOfInterest.push(poi);
+                });
+
 
                 setTimeout(function () {
 
@@ -82,16 +92,13 @@ myApp.controller('userPointOfInterestController', ['$scope', 'pointOfInterestSer
         };
 
         $scope.removeFromFavorites = function (poi) {
-            pointOfInterestService.deleteUserPOI(poi.pointOfInterestId).then(function () {
-                setTimeout(function () {
-                    $scope.getUserPOI();
-                }, 0);
-            })
+            myLocalStorageService.removeFavorite(poi.pointOfInterestId)
+            $scope.getUserPOI();
         };
 
-        $scope.greaterThan = function(prop, val){
-            return function(item){
-                if($scope.filteredRank > 5 || $scope.filteredRank < 0) {
+        $scope.greaterThan = function (prop, val) {
+            return function (item) {
+                if ($scope.filteredRank > 5 || $scope.filteredRank < 0) {
                     $scope.errorMessage = "Filter by number should be between 0 to 5";
                     return true;
                 }
@@ -102,9 +109,9 @@ myApp.controller('userPointOfInterestController', ['$scope', 'pointOfInterestSer
             }
         };
 
-        $scope.greaterThan = function(prop, val){
-            return function(item){
-                if($scope.filteredRank > 5 || $scope.filteredRank < 0) {
+        $scope.greaterThan = function (prop, val) {
+            return function (item) {
+                if ($scope.filteredRank > 5 || $scope.filteredRank < 0) {
                     $scope.errorMessage = "Filter by number should be between 0 to 5";
                     return true;
                 }
@@ -115,14 +122,27 @@ myApp.controller('userPointOfInterestController', ['$scope', 'pointOfInterestSer
             }
         };
 
-        $scope.equalToCategory = function(prop, val){
-            return function(item){
-                if($scope.chosenFilteredCategory === "Don't filter by category") {
+        $scope.equalToCategory = function (prop, val) {
+            return function (item) {
+                if ($scope.chosenFilteredCategory === "Don't filter by category") {
                     return true;
                 }
 
                 return item[prop] === $scope.chosenFilteredCategory;
             }
+        };
+
+        $scope.saveFavorites = function () {
+            let favorites = myLocalStorageService.getFavorites();
+
+            pointOfInterestService.createUserPOI(favorites).then(function () {
+                $scope.errorMessageCreate = null;
+
+            }).catch(function (err) {
+                console.log(err);
+                $scope.errorMessageCreate = err.data;
+            })
+
         };
 
         $scope.getUserPOI();

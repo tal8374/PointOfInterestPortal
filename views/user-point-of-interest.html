@@ -1,6 +1,6 @@
 <div class="row">
 
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <select style="height: 57px; font-size: 20px; padding: 5px; " class="form-control" name="category"
                 ng-model="chosenFilteredCategory"
                 required>
@@ -10,10 +10,16 @@
         </select>
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <input style=" text-align: center; " type='number'
                ng-model='filteredRank' placeholder="Filter by rank"/>
         <p style="color: red;" ng-show="errorMessage"> {{ errorMessage }} </p>
+    </div>
+
+    <div class="col-sm-4">
+        <button class="button btn-primary" style="background: #323641;width: 580px;height: 50px; margin-top: 12px;"
+        ng-click="saveFavorites()"> Save my favorites POI !</button>
+        <p style="color: red;" ng-show="errorMessageCreate"> One of the favorite POI was already added, please remove it </p>
     </div>
 
 </div>

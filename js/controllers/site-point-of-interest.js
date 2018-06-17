@@ -1,5 +1,6 @@
 myApp.controller('sitePointOfInterestController', ['$scope', 'pointOfInterestService', '$location',
-    function ($scope, pointOfInterestService, $location) {
+    'myLocalStorageService',
+    function ($scope, pointOfInterestService, $location, myLocalStorageService) {
 
         $scope.getPOI = function () {
             pointOfInterestService.getPOIList().then(function (pointOfInterests) {
@@ -18,17 +19,15 @@ myApp.controller('sitePointOfInterestController', ['$scope', 'pointOfInterestSer
         };
 
         $scope.goToPOI = function (pointOfInterest) {
-            console.log('/point-of-interest/' + pointOfInterest.pointOfInterestId);
-
             $location.path('/point-of-interest/' + pointOfInterest.pointOfInterestId);
         };
 
         $scope.removeFromFavorites = function (poi) {
-            pointOfInterestService.deleteUserPOI(poi.pointOfInterestId).then(function () {})
+            myLocalStorageService.removeFavorite(poi.pointOfInterestId);
         };
 
         $scope.addFromFavorites = function (poi) {
-            pointOfInterestService.createUserPOI(poi.pointOfInterestId).then(function () {})
+            myLocalStorageService.addFavorite(poi.pointOfInterestId);
         };
 
         $scope.getPOI();

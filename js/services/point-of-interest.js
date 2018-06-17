@@ -34,8 +34,6 @@ myApp.service('pointOfInterestService', ['$http',
         };
 
         factory.getPOIReviews = function (pointOfInterestId) {
-            console.log(serverUrl + "point-of-interest/" + pointOfInterestId + "/review/list");
-
             return $http.get(serverUrl + "point-of-interest/" + pointOfInterestId + "/review/list", {});
         };
 
@@ -56,16 +54,16 @@ myApp.service('pointOfInterestService', ['$http',
             return $http.post(serverUrl + "point-of-interest/" + pointOfInterestId + "/user/" + userId + "/rank", {rank});
         };
 
-        factory.getUserPOI = function (userId) {
-            return $http.get(serverUrl + "point-of-interest/" + "/user/" + 14 + "/list", {});
+        factory.getUserPOI = function () {
+            return $http.get(serverUrl + "point-of-interest/" + "/user/" + 17 + "/list", {});
         };
 
-        factory.createUserPOI = function (pointOfInterestId, userId) {
-            return $http.post(serverUrl + "point-of-interest/" + pointOfInterestId + "/user/" + 14, {});
+        factory.createUserPOI = function (favorites) {
+            return $http.post(serverUrl + "point-of-interest/user/" + 17, {favorites});
         };
 
-        factory.deleteUserPOI = function (pointOfInterestId, userId) {
-            return $http.delete(serverUrl + "point-of-interest/" + pointOfInterestId + "/user/" + 14, {});
+        factory.deleteUserPOI = function (pointOfInterestId) {
+            return $http.delete(serverUrl + "point-of-interest/" + pointOfInterestId + "/user/" + 17, {});
         };
 
         return factory;

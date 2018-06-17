@@ -1,6 +1,6 @@
 myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService', '$routeParams', '$rootScope',
-    '$mdDialog', '$q',
-    function ($scope, pointOfInterestService, $routeParams, $rootScope, $mdDialog, $q) {
+    '$mdDialog', '$q', 'myLocalStorageService',
+    function ($scope, pointOfInterestService, $routeParams, $rootScope, $mdDialog, $q, myLocalStorageService) {
 
         $scope.pointOfInterestId = $routeParams.id;
         $scope.reviewRank = 0;
@@ -17,14 +17,11 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
 
             $scope.isReviewAdded = true;
 
-            console.log($scope.reviewRank);
-            console.log($scope.reviewContent);
-
-            pointOfInterestService.createPOIReview($scope.pointOfInterestId, 14, $scope.reviewContent).then(function () {
+            pointOfInterestService.createPOIReview($scope.pointOfInterestId, 17, $scope.reviewContent).then(function () {
 
                 setTimeout(function () {
 
-                    pointOfInterestService.createPOIRank($scope.pointOfInterestId, 14, $scope.reviewRank).then(function () {
+                    pointOfInterestService.createPOIRank($scope.pointOfInterestId, 17, $scope.reviewRank).then(function () {
                         $scope.getPOI();
                     });
 
@@ -38,10 +35,6 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
         };
 
         $scope.getPOI = function () {
-
-            console.log($scope.isReviewAdded);
-            console.log("here");
-
             pointOfInterestService.getPOI($scope.pointOfInterestId).then(function (POI) {
                 $scope.currentPOI = POI.data[0];
 
@@ -99,8 +92,6 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
                 return pointOfInterestService.getPOIRanks($scope.pointOfInterestId).then(function (POIRanks) {
                     $scope.rank = 0;
 
-                    console.log(POIRanks);
-
                     $scope.ranks = POIRanks.data;
 
                     POIRanks.data.forEach(function (rankData) {
@@ -119,18 +110,16 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
         };
 
         $scope.addToUserFavorite = function () {
-            pointOfInterestService.createUserPOI($scope.pointOfInterestId).then(function (POI, userId) {
-            });
+            myLocalStorageService.addFavorite($scope.pointOfInterestId);
         };
 
         $scope.removeFromUserFavorite = function () {
-            pointOfInterestService.deleteUserPOI($scope.pointOfInterestId).then(function (POI, userId) {
-            });
-        };
+            myLocalStorageService.removeFavorite($scope.pointOfInterestId);
+        }
 
         $scope.addVisit = function () {
             return $q(function (resolve, reject) {
-                return pointOfInterestService.createPOIVisit($scope.pointOfInterestId, 14).then(function () {
+                return pointOfInterestService.createPOIVisit($scope.pointOfInterestId, 17).then(function () {
                     return resolve();
                 });
             })

@@ -40,6 +40,8 @@
                 <input name="answer2" placeholder="Answer" ng-model="user.answer2" required>
             </div>
 
+            <p ng-show="errorMessage">{{ errorMessage }}</p>
+
             <input ng-disabled="myForm.$invalid" type="submit" name="Register" class="next action-button" value="Register" />
         </fieldset>
     </form>

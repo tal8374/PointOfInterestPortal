@@ -19,12 +19,12 @@ myApp.controller('RegistrationController', ['$scope', 'registrationService', 'ca
                     "answer2": $scope.user.answer2
                 };
 
-                if($scope.user.question1 == $scope.user.question2) {
-                    $scope.errorRegisterMessage = "Please choose different questions";
-                    return;
-                }
+            if ($scope.user.question1 == $scope.user.question2) {
+                $scope.errorRegisterMessage = "Please choose different questions";
+                return;
+            }
 
-            if($scope.user.category1 == $scope.user.category2) {
+            if ($scope.user.category1 == $scope.user.category2) {
                 $scope.errorRegisterMessage = "Please choose different categories";
                 return;
             }
@@ -33,12 +33,13 @@ myApp.controller('RegistrationController', ['$scope', 'registrationService', 'ca
                 .then(function (response) {
                     $scope.errorRegisterMessage = null;
 
-                    $location.path('/homepage');
+                    setTimeout(function () {
+                        $location.path('/homepage');
 
-                    console.log(response);
+                    }, 700);
+
                 }, function (response) {
-                    $scope.errorRegisterMessage = response.data;
-                    console.log(response);
+                    $scope.errorMessage = response.data;
                 });
         };
 
@@ -47,7 +48,6 @@ myApp.controller('RegistrationController', ['$scope', 'registrationService', 'ca
                 .then(function (response) {
                     $scope.categories = response.data;
                 }, function (response) {
-                    console.log(response);
                 });
         };
 
@@ -55,9 +55,7 @@ myApp.controller('RegistrationController', ['$scope', 'registrationService', 'ca
             countryService.getCountries()
                 .then(function (response) {
                     $scope.countries = response.data;
-                    console.log(response.data);
                 }, function (response) {
-                    console.log(response);
                 });
         };
 
@@ -65,9 +63,7 @@ myApp.controller('RegistrationController', ['$scope', 'registrationService', 'ca
             questionService.getQuestions()
                 .then(function (response) {
                     $scope.questions = response.data;
-                    console.log(response.data);
                 }, function (response) {
-                    console.log(response);
                 });
         };
 

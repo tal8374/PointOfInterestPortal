@@ -1,4 +1,4 @@
-myApp.controller('LoginController', ['$scope', '$location', 'loginService', 'myLocalStorageService', '$rootScope',
+myApp.controller('aboutController', ['$scope', '$location', 'loginService', 'myLocalStorageService', '$rootScope',
     function ($scope, $location, loginService, myLocalStorageService, $rootScope) {
 
         $scope.login = function () {

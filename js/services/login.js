@@ -8,5 +8,9 @@ myApp.service('loginService', ['$http', function ($http) {
         return $http.post(serverUrl + "login/", userData);
     };
 
+    factory.getUserCategories = function () {
+        return $http.get(serverUrl + "login/user/" + 17, {});
+    };
+
     return factory;
 }]);

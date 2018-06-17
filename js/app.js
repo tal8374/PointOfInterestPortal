@@ -28,6 +28,9 @@ myApp.config(['$routeProvider', function ($routeProvider) {
     }).when('/user-point-of-interest', {
         templateUrl: 'views/user-point-of-interest.html',
         controller: 'userPointOfInterestController',
+    }).when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'aboutController',
     }).otherwise({
         redirectTo: '/homepage'
     });
