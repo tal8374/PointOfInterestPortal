@@ -50,7 +50,7 @@
         <h1> {{ currentPOI.name }} </h1>
         <h1>Number of visits - {{ visits.length }} </h1>
         <h1>Rank - {{ rank }} % </h1>
-        <input data-toggle="modal" data-target="#myModal" name="review" class="add-review next action-button"
+        <input ng-show="currentUser" data-toggle="modal" data-target="#myModal" name="review" class="add-review next action-button"
                value="Add review"/>
 
     </header>

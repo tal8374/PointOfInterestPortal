@@ -1,11 +1,13 @@
 myApp.controller('userPointOfInterestController', ['$scope', 'pointOfInterestService', '$location', '$q',
-    'categoryService', 'myLocalStorageService',
-    function ($scope, pointOfInterestService, $location, $q, categoryService, myLocalStorageService) {
+    'categoryService', 'myLocalStorageService', '$rootScope',
+    function ($scope, pointOfInterestService, $location, $q, categoryService, myLocalStorageService,
+              $rootScope) {
 
         $scope.filteredRank = 0;
         $scope.chosenFilteredCategory = "Don't filter by category";
 
         $scope.getUserPOI = function () {
+
             pointOfInterestService.getPOIList().then(function (pointOfInterests) {
                 $scope.userPointsOfInterest = [];
 
@@ -33,11 +35,13 @@ myApp.controller('userPointOfInterestController', ['$scope', 'pointOfInterestSer
                                 setTimeout(function () {
                                     $scope.getCategories();
 
+
                                 }, 0);
 
                                 $scope.PointsOfInterestRanks = pointOfInterestRanks.data;
 
                                 $scope.updatePOIRank();
+
 
                             });
                         }, 0);

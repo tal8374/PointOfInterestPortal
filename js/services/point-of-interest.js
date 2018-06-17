@@ -1,9 +1,15 @@
-myApp.service('pointOfInterestService', ['$http',
-    function ($http) {
+myApp.service('pointOfInterestService', ['$http', '$rootScope',
+    function ($http, $rootScope) {
 
         var serverUrl = 'http://localhost:1235/';
 
         var factory = {};
+
+        var userId = null;
+
+        if($rootScope.currentUser && $rootScope.currentUser.userId) {
+            userId = $rootScope.currentUser.userId
+        }
 
         factory.getPOIList = function () {
             return $http.get(serverUrl + "point-of-interest/list", {});
@@ -55,15 +61,16 @@ myApp.service('pointOfInterestService', ['$http',
         };
 
         factory.getUserPOI = function () {
-            return $http.get(serverUrl + "point-of-interest/" + "/user/" + 17 + "/list", {});
+            return $http.get(serverUrl + "point-of-interest/" + "/user/" + userId + "/list", {});
         };
 
         factory.createUserPOI = function (favorites) {
-            return $http.post(serverUrl + "point-of-interest/user/" + 17, {favorites});
+            console.log(userId);
+            return $http.post(serverUrl + "point-of-interest/user/" + userId, {favorites});
         };
 
         factory.deleteUserPOI = function (pointOfInterestId) {
-            return $http.delete(serverUrl + "point-of-interest/" + pointOfInterestId + "/user/" + 17, {});
+            return $http.delete(serverUrl + "point-of-interest/" + pointOfInterestId + "/user/" + userId, {});
         };
 
         return factory;

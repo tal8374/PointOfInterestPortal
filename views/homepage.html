@@ -1,4 +1,11 @@
-<div class="row" ng-show="userPointsOfInterest">
+<div ng-hide="currentUser">
+        <fieldset style="padding: 20px; margin-left: 500px;height: 200px; width: 700px; margin-top: 100px;">
+            <h1>Hello new user !</h1>
+            <h1>You can enjoy the POI site by login or register</h1>
+        </fieldset>
+</div>
+
+<div ng-show="currentUser" class="row" ng-show="userPointsOfInterest">
     <div class="col-sm-5">
         <h1 class="poi-header">Last saved POI</h1>
         <div class="row">

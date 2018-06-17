@@ -20,8 +20,8 @@
             </div>
 
             <div style="margin-left: 160px;">
-                <i ng-click="removeFromFavorites(poi)" class="material-icons">star</i>
-                <i ng-click="addFromFavorites(poi)" class="material-icons">star_border</i>
+                <i ng-show="currentUser && isInFavorites(poi)" ng-click="removeFromFavorites(poi)" class="material-icons">star</i>
+                <i ng-show="currentUser &&  !isInFavorites(poi)" ng-click="addFromFavorites(poi)" class="material-icons">star_border</i>
             </div>
         </div>
 

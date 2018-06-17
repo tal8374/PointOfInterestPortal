@@ -7,8 +7,12 @@
 
         <input ng-disabled="myForm.$invalid" type="submit" name="Login" class="next action-button" value="Login"/>
         <h4>or</h4>
-        <input ng-click="moveToRecoverPage()" style="text-align: center; cursor: pointer" name="RecoverPassword"
+        <input  ng-click="changeToRecoverPage()" style="text-align: center; cursor: pointer" name="RecoverPassword"
                class="next action-button" value="Recover Password"/>
+
+        <button  ng-click="changeToRecoverPage()">click</button>
     </fieldset>
 
 </form>
+
+<button  ng-click="changeToRecoverPage()">click</button>

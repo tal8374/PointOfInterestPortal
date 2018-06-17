@@ -3,6 +3,8 @@ var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
 
 myApp.run(['$rootScope', function ($rootScope) {
 
+    $rootScope.isWorkingOut = false;
+
 }]);
 
 myApp.config(['$routeProvider', function ($routeProvider) {

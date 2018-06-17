@@ -7,8 +7,6 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
         $scope.reviewContent = "";
         $scope.isReviewAdded = false;
 
-        var self = this;
-
         $scope.close = function () {
             $mdDialog.hide();
         };
@@ -17,12 +15,13 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
 
             $scope.isReviewAdded = true;
 
-            pointOfInterestService.createPOIReview($scope.pointOfInterestId, 17, $scope.reviewContent).then(function () {
+            pointOfInterestService.createPOIReview($scope.pointOfInterestId, $rootScope.currentUser.userId, $scope.reviewContent).then(function () {
 
                 setTimeout(function () {
 
-                    pointOfInterestService.createPOIRank($scope.pointOfInterestId, 17, $scope.reviewRank).then(function () {
+                    pointOfInterestService.createPOIRank($scope.pointOfInterestId, $rootScope.currentUser.userId, $scope.reviewRank).then(function () {
                         $scope.getPOI();
+
                     });
 
                 }, 2000);
@@ -35,6 +34,7 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
         };
 
         $scope.getPOI = function () {
+
             pointOfInterestService.getPOI($scope.pointOfInterestId).then(function (POI) {
                 $scope.currentPOI = POI.data[0];
 
@@ -115,11 +115,14 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
 
         $scope.removeFromUserFavorite = function () {
             myLocalStorageService.removeFavorite($scope.pointOfInterestId);
-        }
+        };
 
         $scope.addVisit = function () {
             return $q(function (resolve, reject) {
-                return pointOfInterestService.createPOIVisit($scope.pointOfInterestId, 17).then(function () {
+
+                if(!$rootScope.currentUser || !$rootScope.currentUser.userId) return;
+
+                return pointOfInterestService.createPOIVisit($scope.pointOfInterestId, $rootScope.currentUser.userId).then(function () {
                     return resolve();
                 });
             })

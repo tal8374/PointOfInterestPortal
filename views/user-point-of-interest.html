@@ -17,8 +17,9 @@
     </div>
 
     <div class="col-sm-4">
-        <button class="button btn-primary" style="background: #323641;width: 580px;height: 50px; margin-top: 12px;"
+        <button ng-show="currentUser" class="button btn-primary" style="background: #323641;width: 580px;height: 50px; margin-top: 12px;"
         ng-click="saveFavorites()"> Save my favorites POI !</button>
+        <h1 ng-hide="currentUser">In order to save POI you must be logged in!</h1>
         <p style="color: red;" ng-show="errorMessageCreate"> One of the favorite POI was already added, please remove it </p>
     </div>
 
@@ -39,9 +40,10 @@
         </div>
     </div>
 
-    <form ng-show="userPointsOfInterest && userPointsOfInterest.length == 0" id="myform" ng-submit="register()">
+    <form ng-show="userPointsOfInterest && userPointsOfInterest.length == 0" id="myform">
         <fieldset style="width: 900px;padding: 20px; margin-left: -200px">
             <div>
+
                 <h1><b>No Favorite POI !</b></h1>
                 <h2>Seems that you have not chosen any POI</h2>
                 <h2>You can add POI by clicking on one of the POI's stars in POI page!</h2>

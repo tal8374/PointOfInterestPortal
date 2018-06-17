@@ -1,4 +1,4 @@
-myApp.service('loginService', ['$http', function ($http) {
+myApp.service('loginService', ['$http', '$rootScope', function ($http, $rootScope) {
 
     var serverUrl = 'http://localhost:1235/';
 
@@ -9,7 +9,9 @@ myApp.service('loginService', ['$http', function ($http) {
     };
 
     factory.getUserCategories = function () {
-        return $http.get(serverUrl + "login/user/" + 17, {});
+        if(!$rootScope.currentUser || !$rootScope.currentUser.userId) return;
+
+        return $http.get(serverUrl + "login/user/" + $rootScope.currentUser.userId, {});
     };
 
     return factory;

@@ -7,12 +7,12 @@
         <div class="menu" id="open-navbar1">
             <ul class="list">
                 <li><a ng-click="" ng-href="#/site-point-of-interest">POI</a></li>
-                <li><a ng-click="" ng-href="#/user-point-of-interest">My POI</a></li>
+                <li><a ng-controller="navbarController" ng-show="currentUser" ng-href="#/user-point-of-interest">My POI ({{ numOfFavorites }})</a></li>
                 <li ><a ng-click="" ng-href="#/about">About</a></li>
                 <li ng-hide="currentUser"><a ng-click="" ng-href="#/login">Login</a></li>
                 <li ng-hide="currentUser"><a ng-href="#/register">Register</a></li>
-                <li ng-show="currentUser"><a ng-href="#"> Hello {{ currentUser.userName }} </a></li>
-                <li ng-show="currentUser"><a ng-click="logout()" ng-href="#/homepage">logout</a></li>
+                <li ng-show="currentUser"><a> Hello {{ currentUser.userName }} </a></li>
+                <li ng-controller="LoginController" ng-show="currentUser"><a ng-click="logout()" ng-href="#/homepage">logout</a></li>
             </ul>
         </div>
         </li>

@@ -21,13 +21,16 @@ myApp.controller('RecoverPasswordController', ['$scope', 'recoverPasswordService
 
                     $scope.isUserQuestionExists = true;
 
+
                 }).catch(function (err) {
                     $scope.errorMessage = "User name is not exists";
+
 
                 });
 
             }).catch(function (err) {
                 $scope.errorMessage = "User name is not exists";
+
 
             })
 

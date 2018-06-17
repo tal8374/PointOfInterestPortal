@@ -1,15 +1,19 @@
 myApp.controller('HomepageController', ['$scope', 'pointOfInterestService', '$location', 'myLocalStorageService',
-    'loginService', '$q',
-    function ($scope, pointOfInterestService, $location, myLocalStorageService, loginService, $q) {
+    'loginService', '$q', '$rootScope',
+    function ($scope, pointOfInterestService, $location, myLocalStorageService, loginService, $q,
+              $rootScope) {
 
         $scope.getPOI = function () {
+
+            if(!$rootScope.currentUser || !$rootScope.currentUser.userId) {
+                return [];
+            }
+
             pointOfInterestService.getPOICategoryList().then(function (pointOfInterests) {
                 $scope.pointsOfInterest = [];
-                // $scope.pointsOfInterest = pointOfInterests.data;
-
-                console.log(pointOfInterests.data);
 
                 setTimeout(function () {
+
                     $scope.getUserPOI().then(function () {
 
                         setTimeout(function () {
@@ -28,15 +32,12 @@ myApp.controller('HomepageController', ['$scope', 'pointOfInterestService', '$lo
                                     if(poi.categoryId === userCategories.data[1].categoryId) {
                                         $scope.secondCategoryPOI.push(poi);
                                     }
-                                    //
-                                    // $scope.pointsOfInterest.push($scope.firstCategoryPOI[$scope.firstCategoryPOI.length-1]);
-                                    // $scope.pointsOfInterest.push(firstCategoryPOI[firstCategoryPOI.length-2]);
-                                    // $scope.pointsOfInterest.push(firstCategoryPOI[secondCategoryPOI.length-1]);
-                                    // $scope.pointsOfInterest.push(firstCategoryPOI[secondCategoryPOI.length-2]);
-                                })
+
+                                });
 
                                 $scope.firstCategoryPOI = $scope.firstCategoryPOI.slice(0, 2);
                                 $scope.secondCategoryPOI = $scope.secondCategoryPOI.slice(0, 2);
+
 
                             });
                         }, 0);
