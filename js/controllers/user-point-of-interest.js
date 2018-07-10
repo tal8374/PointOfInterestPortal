@@ -130,6 +130,8 @@ myApp.controller('userPointOfInterestController', ['$scope', 'pointOfInterestSer
         $scope.saveFavorites = function () {
             let favorites = myLocalStorageService.getFavorites();
 
+            myLocalStorageService.removeAllFavorites();
+
             pointOfInterestService.createUserPOI(favorites).then(function () {
                 $scope.errorMessageCreate = null;
 

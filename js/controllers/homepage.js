@@ -1,41 +1,63 @@
 myApp.controller('HomepageController', ['$scope', 'pointOfInterestService', '$location', 'myLocalStorageService',
-    'loginService', '$q', '$rootScope', '$location',
+    'loginService', '$q', '$rootScope',
     function ($scope, pointOfInterestService, $location, myLocalStorageService, loginService, $q,
-              $rootScope, $location) {
+              $rootScope) {
 
-        $scope.getPOI = function () {
-
+        $scope.init = function () {
             if (!$rootScope.currentUser || !$rootScope.currentUser.userId) {
-                return [];
+                $scope.showRandomPOI();
+            } else {
+                $scope.showPOIByUserCategory();
             }
+        };
 
+        $scope.showPOIByUserCategory = function () {
             pointOfInterestService.getPOICategoryList().then(function (pointOfInterests) {
-                $scope.pointsOfInterest = [];
 
                 $scope.getUserPOI().then(function () {
 
                     loginService.getUserCategories().then(function (userCategories) {
-                        $scope.firstCategoryPOI = [];
-                        $scope.secondCategoryPOI = [];
 
-                        pointOfInterests.data.forEach(function (poi) {
+                       $scope.filterPOIByUserCategory(pointOfInterests, userCategories);
 
-
-                            if (poi.categoryId === userCategories.data[0].categoryId) {
-                                $scope.firstCategoryPOI.push(poi);
-                            }
-
-                            if (poi.categoryId === userCategories.data[1].categoryId) {
-                                $scope.secondCategoryPOI.push(poi);
-                            }
-
-                        });
-
-                        $scope.firstCategoryPOI = $scope.firstCategoryPOI.slice(0, 2);
-                        $scope.secondCategoryPOI = $scope.secondCategoryPOI.slice(0, 2);
                     });
                 });
             })
+        };
+
+        $scope.filterPOIByUserCategory = function (pointOfInterests, userCategories) {
+            $scope.firstCategoryPOI = [];
+            $scope.secondCategoryPOI = [];
+
+            pointOfInterests.data.forEach(function (poi) {
+                if (poi.categoryId === userCategories.data[0].categoryId) {
+                    $scope.firstCategoryPOI.push(poi);
+                }
+
+                if (poi.categoryId === userCategories.data[1].categoryId) {
+                    $scope.secondCategoryPOI.push(poi);
+                }
+
+            });
+
+            $scope.firstCategoryPOI = $scope.firstCategoryPOI.slice(0, 2);
+            $scope.secondCategoryPOI = $scope.secondCategoryPOI.slice(0, 2);
+        };
+
+        $scope.showRandomPOI = function () {
+            pointOfInterestService.getPOIList().then(function (pointOfInterests) {
+                $scope.pointsOfInterest = pointOfInterests.data;
+
+                $scope.chooseRandomPOI();
+            });
+        };
+
+        $scope.chooseRandomPOI = function () {
+            var size = $scope.pointsOfInterest.length;
+            var random = parseInt(Math.random() * size);
+
+            $scope.randomPOI = [$scope.pointsOfInterest[random % size], $scope.pointsOfInterest[(random + 1) % size],
+                $scope.pointsOfInterest[(random + 2) % size]];
         };
 
         $scope.getUserPOI = function () {
@@ -44,9 +66,11 @@ myApp.controller('HomepageController', ['$scope', 'pointOfInterestService', '$lo
                 pointOfInterestService.getUserPOI().then(function (pointOfInterests) {
                     $scope.userPointsOfInterest = [];
 
-                    if (pointOfInterests.data.length > 1) $scope.userPointsOfInterest.push(pointOfInterests.data[pointOfInterests.data.length - 1]);
+                    if (pointOfInterests.data.length > 1) $scope.userPointsOfInterest
+                        .push(pointOfInterests.data[pointOfInterests.data.length - 1]);
 
-                    if (pointOfInterests.data.length > 2) $scope.userPointsOfInterest.push(pointOfInterests.data[pointOfInterests.data.length - 2]);
+                    if (pointOfInterests.data.length > 2) $scope.userPointsOfInterest
+                        .push(pointOfInterests.data[pointOfInterests.data.length - 2]);
 
                     return resolve();
                 })
@@ -66,6 +90,6 @@ myApp.controller('HomepageController', ['$scope', 'pointOfInterestService', '$lo
             $location.path('/register');
         };
 
-        $scope.getPOI();
+        $scope.init();
 
     }]);

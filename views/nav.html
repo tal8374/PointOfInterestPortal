@@ -12,6 +12,7 @@
                 <li ng-hide="currentUser"><a ng-click="" ng-href="#/login">Login</a></li>
                 <li ng-hide="currentUser"><a ng-href="#/register">Register</a></li>
                 <li ng-show="currentUser"><a> Hello {{ currentUser.userName }} </a></li>
+                <li ng-hide="currentUser"><a> Hello Guest </a></li>
                 <li ng-controller="LoginController" ng-show="currentUser"><a ng-click="logout()" ng-href="#/homepage">logout</a></li>
             </ul>
         </div>

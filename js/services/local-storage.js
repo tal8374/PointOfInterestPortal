@@ -15,7 +15,7 @@ myApp.service('myLocalStorageService', ['$window',
                 return JSON.parse($window.localStorage[key] || '{}');
             },
             getFavorites: function () {
-                return JSON.parse(localStorage.getItem("favorites")) || [];
+                return JSON.parse(localStorage.getItem("favorites")) || "[]";
             },
             addFavorite: function (pointOfInterestId) {
                 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -23,7 +23,6 @@ myApp.service('myLocalStorageService', ['$window',
                 const index = favorites.indexOf(pointOfInterestId);
 
                 if (index === -1) favorites.push(pointOfInterestId);
-                console.log(favorites);
 
                 localStorage.setItem("favorites", JSON.stringify(favorites));
 
@@ -34,9 +33,9 @@ myApp.service('myLocalStorageService', ['$window',
 
                 if (index !== -1) favorites.splice(index, 1);
 
-                console.log(favorites);
-
                 localStorage.setItem("favorites", JSON.stringify(favorites));
+            }, removeAllFavorites: function () {
+                localStorage.setItem("favorites", JSON.stringify([]));
             }
         }
     }]);

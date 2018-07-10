@@ -26,7 +26,6 @@
 </div>
 
 <div class="row">
-    <!--<div ng-show="userPointsOfInterest" ng-repeat="poi in userPointsOfInterest | filter: greaterThan('rank', 0 ) | filter: equalToCategory('category', 0 )" class="col-sm-3">-->
     <div ng-show="userPointsOfInterest" ng-repeat="poi in userPointsOfInterest | filter: equalToCategory('category', 0 ) | filter: greaterThan('rank', 0 ) " class="col-sm-3">
         <div class="card">
             <div ng-click="goToPOI(poi)">

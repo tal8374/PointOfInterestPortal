@@ -36,6 +36,7 @@ myApp.controller('sitePointOfInterestController', ['$scope', 'pointOfInterestSer
 
         $scope.isInFavorites = function (poi) {
             let favorites = myLocalStorageService.getFavorites();
+            console.log(favorites);
 
             return favorites.includes(poi.pointOfInterestId);
         };

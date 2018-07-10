@@ -7,6 +7,17 @@
             <input ng-click="moveToLoginPage()" style="text-align: center; cursor: pointer" name="Register"
                    class="next action-button" value="Click here to login"/>
         </fieldset>
+
+        <div class="home-page-footer row">
+            <div class="card col-sm-1"></div>
+            <div ng-click="goToPOI(poi)" ng-repeat="poi in randomPOI" >
+                <div class="card col-sm-3">
+                    <img style="width: 320px; height: 200px;" ng-src="./assets/images/{{ poi.image }}.jpeg" alt="Avatar">
+                    <h4><b>{{ poi.name }}</b></h4>
+                </div>
+            </div>
+            <div class="card col-sm-1"></div>
+        </div>
 </div>
 
 <div ng-show="currentUser" class="row" ng-show="userPointsOfInterest">
@@ -39,7 +50,7 @@
             <div ng-click="goToPOI(poi)" ng-repeat="poi in firstCategoryPOI" class="col-sm-6">
                 <div class="card">
                     <img style="width: 320px; height: 200px;" ng-src="./assets/images/{{ poi.image }}.jpeg" alt="Avatar">
-                    <h4><b>{{ poi.name }}</b></h4>
+                    <h4><b>{{ poi.image }}</b></h4>
                 </div>
             </div>
         </div>
@@ -48,7 +59,7 @@
             <div ng-click="goToPOI(poi)" ng-repeat="poi in secondCategoryPOI" class="col-sm-6">
                 <div class="card">
                     <img style="width: 320px; height: 200px;" ng-src="./assets/images/{{ poi.image }}.jpeg" alt="Avatar">
-                    <h4><b>{{ poi.name }}</b></h4>
+                    <h4><b>{{ poi.image }}</b></h4>
                 </div>
             </div>
         </div>

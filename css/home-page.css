@@ -44,3 +44,13 @@ h4 {
     top: 30%;
     left: 50%;
 }
+
+.home-page-footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /*padding: 12rem;*/
+    /*background-color: #efefef;*/
+    text-align: center;
+}
