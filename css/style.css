@@ -1,9 +1,12 @@
 @import "navbar.css";
-@import "homepage.css";
+@import "home-page.css";
 @import "form.css";
 @import "point-of-interest.css";
 @import "create-review.css";
 @import "comment.css";
+@import "register.css";
+@import "login.css";
+@import "recover-password.css";
 
 body {
     margin:0;

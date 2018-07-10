@@ -7,10 +7,8 @@ myApp.controller('sitePointOfInterestController', ['$scope', 'pointOfInterestSer
             pointOfInterestService.getPOIList().then(function (pointOfInterests) {
                 $scope.pointsOfInterest = pointOfInterests.data;
 
-                setTimeout(function () {
-                    $scope.getUserPOI();
+                $scope.getUserPOI();
 
-                }, 0);
             })
         };
 

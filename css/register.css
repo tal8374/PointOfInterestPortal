@@ -1,0 +1,9 @@
+.register-form {
+    padding: 20px;
+    position: absolute;
+    height: 690px;
+    width: 900px;
+    margin: -100px 100px 100px -200px;
+    top: 30%;
+    left: 40%;
+}

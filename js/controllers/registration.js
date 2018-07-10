@@ -33,10 +33,8 @@ myApp.controller('RegistrationController', ['$scope', 'registrationService', 'ca
                 .then(function (response) {
                     $scope.errorRegisterMessage = null;
 
-                    setTimeout(function () {
-                        $location.path('/homepage');
+                    $location.path('/homepage');
 
-                    }, 700);
 
                 }, function (response) {
                     $scope.errorMessage = response.data;
@@ -69,15 +67,9 @@ myApp.controller('RegistrationController', ['$scope', 'registrationService', 'ca
 
         $scope.init = function () {
 
-            setTimeout(function () {
-                $scope.getQuestions();
-            }, 2000);
+            $scope.getQuestions();
 
-
-            setTimeout(function () {
-                $scope.getCategories();
-            }, 0);
-
+            $scope.getCategories();
 
             $scope.getCountries();
 

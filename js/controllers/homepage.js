@@ -1,48 +1,40 @@
 myApp.controller('HomepageController', ['$scope', 'pointOfInterestService', '$location', 'myLocalStorageService',
-    'loginService', '$q', '$rootScope',
+    'loginService', '$q', '$rootScope', '$location',
     function ($scope, pointOfInterestService, $location, myLocalStorageService, loginService, $q,
-              $rootScope) {
+              $rootScope, $location) {
 
         $scope.getPOI = function () {
 
-            if(!$rootScope.currentUser || !$rootScope.currentUser.userId) {
+            if (!$rootScope.currentUser || !$rootScope.currentUser.userId) {
                 return [];
             }
 
             pointOfInterestService.getPOICategoryList().then(function (pointOfInterests) {
                 $scope.pointsOfInterest = [];
 
-                setTimeout(function () {
+                $scope.getUserPOI().then(function () {
 
-                    $scope.getUserPOI().then(function () {
+                    loginService.getUserCategories().then(function (userCategories) {
+                        $scope.firstCategoryPOI = [];
+                        $scope.secondCategoryPOI = [];
 
-                        setTimeout(function () {
-
-                            loginService.getUserCategories().then(function (userCategories) {
-                                $scope.firstCategoryPOI = [];
-                                $scope.secondCategoryPOI = [];
-
-                                pointOfInterests.data.forEach(function (poi) {
+                        pointOfInterests.data.forEach(function (poi) {
 
 
-                                    if(poi.categoryId === userCategories.data[0].categoryId) {
-                                        $scope.firstCategoryPOI.push(poi);
-                                    }
+                            if (poi.categoryId === userCategories.data[0].categoryId) {
+                                $scope.firstCategoryPOI.push(poi);
+                            }
 
-                                    if(poi.categoryId === userCategories.data[1].categoryId) {
-                                        $scope.secondCategoryPOI.push(poi);
-                                    }
+                            if (poi.categoryId === userCategories.data[1].categoryId) {
+                                $scope.secondCategoryPOI.push(poi);
+                            }
 
-                                });
+                        });
 
-                                $scope.firstCategoryPOI = $scope.firstCategoryPOI.slice(0, 2);
-                                $scope.secondCategoryPOI = $scope.secondCategoryPOI.slice(0, 2);
-
-
-                            });
-                        }, 0);
+                        $scope.firstCategoryPOI = $scope.firstCategoryPOI.slice(0, 2);
+                        $scope.secondCategoryPOI = $scope.secondCategoryPOI.slice(0, 2);
                     });
-                }, 0);
+                });
             })
         };
 
@@ -64,6 +56,14 @@ myApp.controller('HomepageController', ['$scope', 'pointOfInterestService', '$lo
 
         $scope.goToPOI = function (pointOfInterest) {
             $location.path('/point-of-interest/' + pointOfInterest.pointOfInterestId);
+        };
+
+        $scope.moveToLoginPage = function () {
+            $location.path('/login');
+        };
+
+        $scope.moveToRegisterPage = function () {
+            $location.path('/register');
         };
 
         $scope.getPOI();

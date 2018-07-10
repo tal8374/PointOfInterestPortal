@@ -1,0 +1,10 @@
+.login-form {
+    padding: 20px;
+    position: absolute;
+    height: 440px;
+    width: 500px;
+    margin: -100px 100px 100px -200px;
+    top: 30%;
+    left: 50%;
+
+}

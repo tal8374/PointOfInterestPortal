@@ -17,14 +17,12 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
 
             pointOfInterestService.createPOIReview($scope.pointOfInterestId, $rootScope.currentUser.userId, $scope.reviewContent).then(function () {
 
-                setTimeout(function () {
 
-                    pointOfInterestService.createPOIRank($scope.pointOfInterestId, $rootScope.currentUser.userId, $scope.reviewRank).then(function () {
-                        $scope.getPOI();
+                pointOfInterestService.createPOIRank($scope.pointOfInterestId, $rootScope.currentUser.userId, $scope.reviewRank).then(function () {
+                    $scope.getPOI();
 
-                    });
+                });
 
-                }, 2000);
             });
 
         };
@@ -38,31 +36,21 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
             pointOfInterestService.getPOI($scope.pointOfInterestId).then(function (POI) {
                 $scope.currentPOI = POI.data[0];
 
-                setTimeout(function () {
-                    $scope.getPOIVisits($scope.pointOfInterestId).then(function () {
+                $scope.getPOIVisits($scope.pointOfInterestId).then(function () {
 
-                        setTimeout(function () {
+                    $scope.getPOIReviews().then(function () {
 
-                            $scope.getPOIReviews().then(function () {
-                                setTimeout(function () {
-
-                                    $scope.getPOIRanks().then(function () {
+                        $scope.getPOIRanks().then(function () {
 
 
-                                        setTimeout(function () {
+                            if (!$scope.isReviewAdded) {
+                                $scope.addVisit();
+                            }
 
-                                            if (!$scope.isReviewAdded) {
-                                                $scope.addVisit();
-                                            }
 
-                                        }, 0);
-
-                                    });
-                                }, 0);
-                            });
-                        }, 0);
+                        });
                     });
-                }, 0);
+                });
             });
         };
 
@@ -120,7 +108,7 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
         $scope.addVisit = function () {
             return $q(function (resolve, reject) {
 
-                if(!$rootScope.currentUser || !$rootScope.currentUser.userId) return;
+                if (!$rootScope.currentUser || !$rootScope.currentUser.userId) return;
 
                 return pointOfInterestService.createPOIVisit($scope.pointOfInterestId, $rootScope.currentUser.userId).then(function () {
                     return resolve();

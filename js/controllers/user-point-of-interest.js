@@ -21,33 +21,24 @@ myApp.controller('userPointOfInterestController', ['$scope', 'pointOfInterestSer
                 });
 
 
-                setTimeout(function () {
+                pointOfInterestService.getPOICategoryList().then(function (pointOfInterestCategories) {
+                    $scope.PointsOfInterestCategories = pointOfInterestCategories.data;
 
-                    pointOfInterestService.getPOICategoryList().then(function (pointOfInterestCategories) {
-                        $scope.PointsOfInterestCategories = pointOfInterestCategories.data;
-
-                        $scope.updatePOICategory();
-
-                        setTimeout(function () {
-
-                            pointOfInterestService.getPOIRankList().then(function (pointOfInterestRanks) {
-
-                                setTimeout(function () {
-                                    $scope.getCategories();
+                    $scope.updatePOICategory();
 
 
-                                }, 0);
+                    pointOfInterestService.getPOIRankList().then(function (pointOfInterestRanks) {
 
-                                $scope.PointsOfInterestRanks = pointOfInterestRanks.data;
+                        $scope.getCategories();
 
-                                $scope.updatePOIRank();
+                        $scope.PointsOfInterestRanks = pointOfInterestRanks.data;
+
+                        $scope.updatePOIRank();
 
 
-                            });
-                        }, 0);
                     });
+                });
 
-                }, 0);
 
             })
         };

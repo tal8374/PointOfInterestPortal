@@ -1,5 +1,5 @@
-<form id="myform" ng-submit="login()">
-    <fieldset style="padding: 20px;">
+<form ng-submit="login()">
+    <fieldset class="login-form" >
         <h1>Login</h1>
         <input name="userName" placeholder="User Name" ng-model="user.userName" required>
         <input type="password" name="password" placeholder="Password" ng-model="user.password" ng-required="true">
@@ -10,9 +10,6 @@
         <input  ng-click="changeToRecoverPage()" style="text-align: center; cursor: pointer" name="RecoverPassword"
                class="next action-button" value="Recover Password"/>
 
-        <button  ng-click="changeToRecoverPage()">click</button>
     </fieldset>
 
 </form>
-
-<button  ng-click="changeToRecoverPage()">click</button>
