@@ -17,9 +17,7 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
 
             pointOfInterestService.createPOIReview($scope.pointOfInterestId, $rootScope.currentUser.userId, $scope.reviewContent).then(function () {
 
-
                 pointOfInterestService.createPOIRank($scope.pointOfInterestId, $rootScope.currentUser.userId, $scope.reviewRank).then(function () {
-                    $scope.getPOI();
 
                 });
 
@@ -41,12 +39,7 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
                     $scope.getPOIReviews().then(function () {
 
                         $scope.getPOIRanks().then(function () {
-
-
-                            if (!$scope.isReviewAdded) {
                                 $scope.addVisit();
-                            }
-
 
                         });
                     });
@@ -57,8 +50,7 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
         $scope.getPOIReviews = function () {
             return $q(function (resolve, reject) {
                 pointOfInterestService.getPOIReviews($scope.pointOfInterestId).then(function (POIReviews) {
-                    $scope.reviews = POIReviews.data;
-                    console.log(POIReviews);
+                    $scope.reviews = POIReviews.data.reverse();
                     return resolve();
 
                 });
@@ -78,12 +70,16 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
         $scope.getPOIRanks = function () {
             return $q(function (resolve, reject) {
                 return pointOfInterestService.getPOIRanks($scope.pointOfInterestId).then(function (POIRanks) {
+                    console.log(POIRanks.data);
                     $scope.rank = 0;
 
                     $scope.ranks = POIRanks.data;
 
+                    POIRanks.data = POIRanks.data.reverse();
+
                     POIRanks.data.forEach(function (rankData) {
                         $scope.rank += rankData.rank;
+
                     });
 
                     if (POIRanks.data.length > 0) {
@@ -108,7 +104,7 @@ myApp.controller('pointOfInterestController', ['$scope', 'pointOfInterestService
         $scope.addVisit = function () {
             return $q(function (resolve, reject) {
 
-                if (!$rootScope.currentUser || !$rootScope.currentUser.userId) return;
+                if (!$rootScope.currentUser ) return;
 
                 return pointOfInterestService.createPOIVisit($scope.pointOfInterestId, $rootScope.currentUser.userId).then(function () {
                     return resolve();

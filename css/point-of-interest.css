@@ -138,4 +138,6 @@
     color: #e53935;
 }
 
-
+.checked {
+    color: orange;
+}

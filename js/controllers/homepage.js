@@ -64,12 +64,13 @@ myApp.controller('HomepageController', ['$scope', 'pointOfInterestService', '$lo
 
             return $q(function (resolve, reject) {
                 pointOfInterestService.getUserPOI().then(function (pointOfInterests) {
+                    console.log(pointOfInterests);
                     $scope.userPointsOfInterest = [];
 
-                    if (pointOfInterests.data.length > 1) $scope.userPointsOfInterest
+                    if (pointOfInterests.data.length >= 1) $scope.userPointsOfInterest
                         .push(pointOfInterests.data[pointOfInterests.data.length - 1]);
 
-                    if (pointOfInterests.data.length > 2) $scope.userPointsOfInterest
+                    if (pointOfInterests.data.length >= 2) $scope.userPointsOfInterest
                         .push(pointOfInterests.data[pointOfInterests.data.length - 2]);
 
                     return resolve();

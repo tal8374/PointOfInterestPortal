@@ -78,7 +78,6 @@ myApp.controller('userPointOfInterestController', ['$scope', 'pointOfInterestSer
                     $scope.categories = response.data;
 
                 }, function (response) {
-                    console.log(response);
                 });
         };
 
@@ -131,6 +130,8 @@ myApp.controller('userPointOfInterestController', ['$scope', 'pointOfInterestSer
             let favorites = myLocalStorageService.getFavorites();
 
             myLocalStorageService.removeAllFavorites();
+
+            $scope.userPointsOfInterest = [];
 
             pointOfInterestService.createUserPOI(favorites).then(function () {
                 $scope.errorMessageCreate = null;

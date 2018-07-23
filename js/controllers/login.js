@@ -24,13 +24,11 @@ myApp.controller('LoginController', ['$scope', '$location', 'loginService', 'myL
 
             myLocalStorageService.set('token', "")
 
-            console.log("clicked");
         };
 
         $scope.moveToRecoverPage = function () {
             console.log("clicked");
             $location.path('/recover-password');
-            console.log("clicked2");
 
         };
 

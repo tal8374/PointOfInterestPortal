@@ -50,7 +50,8 @@
         <h1> {{ currentPOI.name }} </h1>
         <h1>Number of visits - {{ visits.length }} </h1>
         <h1>Rank - {{ rank }} % </h1>
-        <input ng-show="currentUser" data-toggle="modal" data-target="#myModal" name="review" class="add-review next action-button"
+        <input ng-show="currentUser" data-toggle="modal" data-target="#myModal" name="review"
+               class="add-review next action-button"
                value="Add review"/>
 
     </header>
@@ -62,34 +63,36 @@
                 <div class="rbd-core-ui">
                     <div class="rbd-review-slider" data-speed="1000">
                         <div class="rbd-review review1.1 rbd-curr">
-                            <h3 class="rbd-heading">{{ reviews[reviews.length - 1].content }}</h3>
-                            <div class="stars rate" data-percent=" {{ ranks[reviews.length - 1].rank * 20 }} ">
-                                <a  title="awful">★</a><a  title="ok">★</a>
-                                <a  title="good">★</a><a  title="great">★</a>
-                                <a title="awesome">★</a></div>
+                            <h3 class="rbd-heading">{{ reviews[0].content }}</h3>
+                            <span ng-class="ranks[0].rank > 0?'checked':''" class="fa fa-star"></span>
+                            <span ng-class="ranks[0].rank > 1?'checked':''" class="fa fa-star"></span>
+                            <span ng-class="ranks[0].rank > 2?'checked':''" class="fa fa-star"></span>
+                            <span ng-class="ranks[0].rank > 3?'checked':''" class="fa fa-star"></span>
+                            <span ng-class="ranks[0].rank > 4?'checked':''" class="fa fa-star"></span>
                             <br>
-                            <div class="rbd-review-meta">Written on {{ reviews[reviews.length - 1].date }}</div>
+                            <div class="rbd-review-meta">Written on {{ reviews[0].date }}</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6" ng-show="reviews.length > 1">
-                <div class="rbd-core-ui">
-                    <div class="rbd-review-slider" data-speed="1000">
-                        <div class="rbd-review review1.1 rbd-curr">
-                            <h3 class="rbd-heading">{{ reviews[reviews.length - 2].content }}</h3>
-                            <div class="stars rate" data-percent=" {{ ranks[reviews.length - 2].rank * 20 }} ">
-                                <a  title="awful">★</a><a  title="ok">★</a>
-                                <a  title="good">★</a><a  title="great">★</a>
-                                <a title="awesome">★</a></div>
-                            <br>
-                            <div class="rbd-review-meta">Written on {{ reviews[reviews.length - 2].date }}</div>
-                        </div>
+        <div class="col-sm-6" ng-show="reviews.length > 1">
+                <div class="rbd-review-slider" data-speed="1000">
+                    <div class="rbd-review review1.1 rbd-curr">
+                        <h3 class="rbd-heading">{{ reviews[1].content }}</h3>
+                        <span ng-class="ranks[1].rank > 0?'checked':''" class="fa fa-star"></span>
+                        <span ng-class="ranks[1].rank > 1?'checked':''" class="fa fa-star"></span>
+                        <span ng-class="ranks[1].rank > 2?'checked':''" class="fa fa-star"></span>
+                        <span ng-class="ranks[1].rank > 3?'checked':''" class="fa fa-star"></span>
+                        <span ng-class="ranks[1].rank > 4?'checked':''" class="fa fa-star"></span>
+                        <br>
+                        <div class="rbd-review-meta">Written on {{ reviews[1].date }}</div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+    </div>
+
+</div>
 
 </div>

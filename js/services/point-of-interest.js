@@ -56,7 +56,6 @@ myApp.service('pointOfInterestService', ['$http', '$rootScope',
         };
 
         factory.createPOIRank = function (pointOfInterestId, userId, rank) {
-            console.log();
             return $http.post(serverUrl + "point-of-interest/" + pointOfInterestId + "/user/" + userId + "/rank", {rank});
         };
 
